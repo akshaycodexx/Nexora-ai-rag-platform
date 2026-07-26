@@ -1,0 +1,55 @@
+# Environment variables & secrets (CRITICAL)
+.env
+.env.local
+.env.*.local
+*.env
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+backend/venv/
+backend/__pycache__/
+
+# Node.js & Frontend dependencies
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+frontend/dist/
+frontend/build/
+.vite/
+frontend/.vite/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+backend/sql_app.db
+sql_app.db
+
+# User uploaded files & media
+uploaded_pdfs/
+backend/uploaded_pdfs/
+uploads/
+
+# IDEs & System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

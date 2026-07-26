@@ -1,0 +1,557 @@
+Rebuild the frontend as a premium enterprise SaaS dashboard using React + Vite.
+
+IMPORTANT:
+Do NOT create a generic admin-template-looking UI.
+The interface should feel like a real production B2B SaaS product similar in design quality to Linear, Vercel, Stripe Dashboard, Notion, or modern developer/data platforms.
+
+Do not copy those products. Use them only as a quality benchmark.
+
+TECH:
+- React + Vite
+- React Router
+- Lucide React icons
+- CSS variables for design tokens
+- Reusable React components
+- No emojis
+- No gradients
+- No excessive shadows
+- No glassmorphism
+
+BRANDING:
+Do NOT use "Mentis", "Mentis ETL", "ETL Platform", or placeholder product branding.
+
+Use this temporary product name:
+"Nexora"
+
+Create the brand component separately so the product name can be changed later from one place.
+
+COLOR SYSTEM:
+
+LIGHT:
+--primary: #063B00;
+--primary-hover: #0A5203;
+--primary-active: #042D00;
+
+--page-bg: #F7F9F6;
+--surface: #FFFFFF;
+--surface-secondary: #F4F6F4;
+--border: #DDE4DC;
+
+--text-primary: #111811;
+--text-secondary: #667066;
+--text-muted: #8B958B;
+
+DARK:
+--primary: #63C95C;
+--button-primary: #2F7D32;
+--button-hover: #3D9640;
+
+--page-bg: #0D110D;
+--surface: #141A14;
+--surface-secondary: #1A211A;
+--border: #293329;
+
+--text-primary: #F3F6F3;
+--text-secondary: #A5B0A5;
+--text-muted: #788478;
+
+CRITICAL COLOR RULE:
+DO NOT make the sidebar green.
+
+The sidebar must use the normal neutral surface color.
+
+#063B00 is an ACCENT color, not a background color.
+
+Use green primarily for:
+- primary buttons
+- active navigation item
+- selected controls
+- tiny status indicators
+- links when appropriate
+- focus states
+- small brand details
+
+Do not flood large sections of the UI with green.
+
+APP SHELL:
+
+Create a fixed desktop sidebar on the left and a compact top header.
+
+SIDEBAR:
+Expanded width: 240px
+Collapsed width: 68px
+
+The sidebar MUST actually collapse.
+
+Expanded:
+icon + label
+
+Collapsed:
+icons only
+tooltips on hover
+
+Add a collapse/expand button near the sidebar header.
+
+Navigation:
+
+Overview
+Ask AI
+Documents
+Knowledge Base
+Guardrails
+Users
+Activity
+Settings
+
+Group navigation logically instead of displaying one long list.
+
+Example groups:
+Workspace
+AI & Knowledge
+Administration
+
+ACTIVE NAVIGATION:
+Do NOT fill the entire sidebar with green.
+
+Active item:
+background: very subtle green tint
+text/icon: #063B00
+optional 2-3px left indicator
+
+Inactive items:
+neutral text
+transparent background
+
+Hover:
+subtle neutral/light green tinted background
+
+TOP HEADER:
+
+Keep the header minimal.
+
+Left:
+mobile sidebar trigger when necessary
+
+Center/left:
+global search / command bar
+placeholder: "Search or jump to..."
+
+Right:
+system status indicator
+notification bell
+ONE theme toggle
+user avatar/menu
+
+CRITICAL:
+Theme switching must exist in ONE location only.
+
+Do not put another theme toggle in the sidebar.
+
+User information should also not be unnecessarily duplicated.
+
+Responsive behavior:
+Desktop: collapsible sidebar
+Tablet: compact/collapsed sidebar
+Mobile: sidebar becomes an off-canvas drawer
+
+Persist:
+- theme preference
+- sidebar collapsed state
+
+using localStorage.
+
+Build the AppShell, Sidebar and Header first.
+Do not redesign the dashboard content yet.
+
+Now build the Overview dashboard inside the existing AppShell.
+
+Do NOT change the sidebar/header architecture from Part 1.
+
+The dashboard should look information-dense but calm, like a serious production SaaS product.
+
+Avoid:
+- giant welcome banners
+- decorative illustrations
+- oversized cards
+- excessive rounded containers
+- every section looking like a card
+- repeated information
+- unnecessary green backgrounds
+
+CONTENT HEADER:
+
+Breadcrumb:
+Workspace / Overview
+
+Title:
+Overview
+
+Subtitle:
+"Monitor your knowledge base and RAG activity."
+
+Right side:
+primary button: "Upload document"
+secondary button: "Ask a question"
+
+Use #063B00 only for the primary action in light mode.
+
+METRICS:
+
+Create 4 compact metric cards:
+
+Documents
+Indexed Chunks
+Queries Today
+Retrieval Success
+
+Each card should contain:
+- small label
+- prominent value
+- small contextual comparison/status
+- subtle Lucide icon
+
+Cards:
+white in light mode
+dark surface in dark mode
+1px border
+10-12px radius
+little or no shadow
+
+Do NOT put giant green icon circles in every card.
+
+MAIN GRID:
+
+Below metrics create an asymmetric professional grid.
+
+LEFT AREA (~65%):
+
+"Query Activity"
+
+Create a clean analytics panel showing:
+- query volume over time
+- 7D / 30D selector
+- lightweight chart
+- success/failure indicators
+
+Use green sparingly for the main data series.
+
+RIGHT AREA (~35%):
+
+"System Health"
+
+Show compact rows:
+
+Vector Index
+Embedding Service
+LLM Provider
+Document Processor
+Guardrails
+
+Statuses:
+Operational
+Warning
+Offline
+
+Use small status dots/badges, not giant colored blocks.
+
+NEXT ROW:
+
+LEFT:
+"Recent Documents"
+
+Use a compact table/list.
+
+Columns:
+Document
+Type
+Chunks
+Status
+Updated
+Actions
+
+Example documents:
+product-requirements.pdf
+api-documentation.docx
+architecture.xml
+release-notes.txt
+
+Status chips:
+Indexed
+Processing
+Failed
+
+RIGHT:
+"Recent Queries"
+
+Show recent user questions with:
+- truncated question
+- retrieval/source count
+- response time
+- timestamp
+
+Example:
+"How does the authentication flow work?"
+"Which service processes uploaded documents?"
+"What are the current API rate limits?"
+
+BOTTOM:
+Add a compact "Usage" section showing:
+Storage
+Documents
+Queries
+Token usage
+
+Do NOT add duplicate data that already exists elsewhere.
+
+SPACING:
+Use an 8px spacing system.
+Content max width around 1600px.
+Dashboard padding:
+24px desktop
+16px tablet/mobile.
+
+Typography:
+Use Inter or a similar clean sans-serif.
+
+The visual hierarchy should come from typography, spacing and borders — NOT from colors and shadows.
+
+Make every component reusable:
+MetricCard
+StatusRow
+DocumentTable
+RecentQueryItem
+UsageBar
+SectionHeader
+
+Add realistic loading skeletons and empty states.
+
+Do not connect fake APIs yet.
+Use structured mock data.
+
+
+Complete the React SaaS application while preserving the exact design system and AppShell created in Parts 1 and 2.
+
+Build these functional pages:
+
+1. Ask AI
+2. Documents
+3. Knowledge Base
+4. Guardrails
+5. Users
+6. Activity
+7. Settings
+
+ASK AI PAGE:
+
+This should be the core RAG workspace.
+
+Do NOT make it look like a ChatGPT clone.
+
+Layout:
+
+Page header:
+Ask AI
+"Query your indexed organizational knowledge."
+
+Main area:
+two-column layout on large desktop.
+
+LEFT / MAIN:
+question input
+answer workspace
+citations/sources
+
+RIGHT:
+retrieval details panel
+
+Question composer:
+large but compact textarea
+placeholder:
+"Ask a question about your knowledge base..."
+
+Controls below:
+collection selector
+model selector if required
+Ask button
+
+Primary Ask button:
+#063B00
+hover #0A5203
+active #042D00
+
+Answer:
+clean typography
+no unnecessary colored container
+
+Show:
+Grounded answer
+Confidence
+Response time
+Sources used
+
+CITATIONS:
+Create professional source cards showing:
+filename
+page/section
+relevance score
+
+Clicking a citation should expand the relevant excerpt.
+
+RIGHT RETRIEVAL PANEL:
+Retrieved chunks
+Similarity scores
+Metadata
+Guardrail result
+
+Allow this panel to collapse.
+
+DOCUMENTS PAGE:
+
+Header:
+Documents
+
+Actions:
+Upload document
+
+Create drag/drop upload as a compact modal or panel.
+Do NOT permanently consume half the screen with a giant upload box.
+
+Supported:
+PDF
+DOCX
+XML
+TXT
+
+Main content should be a professional table:
+
+Name
+Format
+Size
+Chunks
+Index Status
+Uploaded
+Owner
+Actions
+
+Add:
+search
+status filter
+format filter
+sort
+pagination
+
+KNOWLEDGE BASE:
+Show collections/indexes.
+Allow users to inspect:
+document count
+chunk count
+embedding model
+last indexed
+status
+
+GUARDRAILS:
+Show configurable guardrail policies using clean rows/cards and toggles.
+
+USERS:
+Professional data table:
+User
+Role
+Status
+Last Active
+Actions
+
+ACTIVITY:
+Audit/event timeline with filters.
+
+SETTINGS:
+Use sections/tabs:
+General
+Models
+API
+Security
+
+Do not put theme settings here if the global header already contains the theme toggle.
+
+RESPONSIVE:
+>= 1280px:
+full desktop experience
+
+768px-1279px:
+collapsed sidebar preferred
+
+< 768px:
+off-canvas navigation
+single-column cards
+responsive tables
+retrieval panel becomes drawer/bottom sheet
+
+INTERACTION QUALITY:
+
+Implement:
+hover states
+focus states
+keyboard navigation
+tooltips
+loading states
+empty states
+error states
+disabled states
+toast notifications
+
+Accessibility:
+semantic HTML
+ARIA labels where necessary
+visible keyboard focus
+good contrast
+
+Use Lucide React icons only.
+
+FINAL QUALITY AUDIT:
+
+Before finishing, inspect the entire application and remove:
+
+- duplicate theme toggles
+- duplicate user profiles
+- duplicated navigation actions
+- unnecessary cards
+- unnecessary green surfaces
+- excessive border radius
+- excessive shadows
+- gradients
+- emojis
+- decorative clutter
+- inconsistent spacing
+- placeholder lorem ipsum
+
+The sidebar background MUST remain neutral.
+
+#063B00 should feel like a brand accent.
+
+The finished application should look appropriate for an enterprise RAG/AI SaaS product used daily by engineering and operations teams.
+
+Do not create only static HTML.
+
+Build actual React components with routing and responsive interactions.
+
+Keep API logic isolated in:
+src/services/
+
+Keep theme/design tokens centralized.
+
+Suggested architecture:
+
+src/
+  components/
+    layout/
+    ui/
+    dashboard/
+    rag/
+    documents/
+  pages/
+  services/
+  hooks/
+  context/
+  data/
+  styles/
+
+Make the implementation maintainable and production-oriented.

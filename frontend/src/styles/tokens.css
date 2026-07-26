@@ -1,0 +1,80 @@
+/* ======================================================
+   NEXORA DESIGN SYSTEM TOKENS
+   Strict Color Rules: Light & Dark Modes
+   Zero Gradients | Zero Glassmorphism | Neutral Sidebar
+   ====================================================== */
+
+:root {
+  /* LIGHT MODE TOKENS */
+  --primary: #063B00;
+  --primary-hover: #0A5203;
+  --primary-active: #042D00;
+  --button-primary: #063B00;
+  --button-hover: #0A5203;
+
+  --page-bg: #F7F9F6;
+  --surface: #FFFFFF;
+  --surface-secondary: #F4F6F4;
+  --border: #DDE4DC;
+
+  --text-primary: #111811;
+  --text-secondary: #667066;
+  --text-muted: #8B958B;
+
+  /* Accent Tints & Status Colors */
+  --primary-tint: rgba(6, 59, 0, 0.06);
+  --primary-tint-hover: rgba(6, 59, 0, 0.1);
+  --status-success-bg: rgba(6, 59, 0, 0.08);
+  --status-success-text: #063B00;
+  --status-warning-bg: rgba(217, 119, 6, 0.1);
+  --status-warning-text: #d97706;
+  --status-error-bg: rgba(220, 38, 38, 0.1);
+  --status-error-text: #dc2626;
+
+  /* Dimensions & Spacing Grid (8px base) */
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 68px;
+  --header-height: 56px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* Subtle shadow for elevated components only */
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-dropdown: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  /* DARK MODE TOKENS */
+  --primary: #63C95C;
+  --primary-hover: #8BE284;
+  --primary-active: #52B54B;
+  --button-primary: #2F7D32;
+  --button-hover: #3D9640;
+
+  --page-bg: #0D110D;
+  --surface: #141A14;
+  --surface-secondary: #1A211A;
+  --border: #293329;
+
+  --text-primary: #F3F6F3;
+  --text-secondary: #A5B0A5;
+  --text-muted: #788478;
+
+  /* Accent Tints & Status Colors */
+  --primary-tint: rgba(99, 201, 92, 0.1);
+  --primary-tint-hover: rgba(99, 201, 92, 0.18);
+  --status-success-bg: rgba(99, 201, 92, 0.15);
+  --status-success-text: #63C95C;
+  --status-warning-bg: rgba(245, 158, 11, 0.15);
+  --status-warning-text: #fbbf24;
+  --status-error-bg: rgba(239, 68, 68, 0.15);
+  --status-error-text: #f87171;
+
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-dropdown: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
+}
