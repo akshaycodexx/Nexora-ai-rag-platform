@@ -4,30 +4,36 @@ from app.core.config import settings
 from app.db.database import engine, Base
 from app.api.routes import auth, protected, rag, users, dashboard, guardrails, activity, settings as settings_route
 
-# Create database tables automatically on startup
-Base.metadata.create_all(bind=engine)
+# Create database tables automatically for local SQLite only.
+# On hosted Postgres/Neon, run migrations/admin setup separately so app startup can bind $PORT fast.
+try:
+    if settings.DATABASE_URL.startswith("sqlite") or settings.DATABASE_URL_AUTO_CREATE == "true":
+        Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Startup database initialization notice: {e}")
 
 # Auto-migrate missing columns for SQLite
 try:
-    with engine.connect() as conn:
-        from sqlalchemy import text
-        res = conn.execute(text("PRAGMA table_info(system_settings)"))
-        columns = [row[1] for row in res.fetchall()]
-        new_cols = [
-            ("embedding_provider", "VARCHAR DEFAULT 'local'"),
-            ("embedding_api_key", "VARCHAR DEFAULT ''"),
-            ("custom_llm_provider", "VARCHAR DEFAULT 'gemini'"),
-            ("custom_llm_name", "VARCHAR DEFAULT 'gemini-1.5-flash'"),
-            ("custom_llm_base_url", "VARCHAR DEFAULT ''"),
-            ("groq_api_key", "VARCHAR DEFAULT ''"),
-            ("top_k", "INTEGER DEFAULT 4"),
-            ("vector_db_provider", "VARCHAR DEFAULT 'sqlite_vector'"),
-            ("vector_db_path", "VARCHAR DEFAULT './sql_app.db'")
-        ]
-        for col_name, col_type in new_cols:
-            if col_name not in columns:
-                conn.execute(text(f"ALTER TABLE system_settings ADD COLUMN {col_name} {col_type}"))
-        conn.commit()
+    if settings.DATABASE_URL.startswith("sqlite"):
+        with engine.connect() as conn:
+            from sqlalchemy import text
+            res = conn.execute(text("PRAGMA table_info(system_settings)"))
+            columns = [row[1] for row in res.fetchall()]
+            new_cols = [
+                ("embedding_provider", "VARCHAR DEFAULT 'local'"),
+                ("embedding_api_key", "VARCHAR DEFAULT ''"),
+                ("custom_llm_provider", "VARCHAR DEFAULT 'gemini'"),
+                ("custom_llm_name", "VARCHAR DEFAULT 'gemini-1.5-flash'"),
+                ("custom_llm_base_url", "VARCHAR DEFAULT ''"),
+                ("groq_api_key", "VARCHAR DEFAULT ''"),
+                ("top_k", "INTEGER DEFAULT 4"),
+                ("vector_db_provider", "VARCHAR DEFAULT 'sqlite_vector'"),
+                ("vector_db_path", "VARCHAR DEFAULT './sql_app.db'")
+            ]
+            for col_name, col_type in new_cols:
+                if col_name not in columns:
+                    conn.execute(text(f"ALTER TABLE system_settings ADD COLUMN {col_name} {col_type}"))
+            conn.commit()
 except Exception as e:
     print(f"Startup schema check notice: {e}")
 

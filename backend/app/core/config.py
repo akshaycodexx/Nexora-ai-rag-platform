@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     DATABASE_URL: str = "sqlite:///./sql_app.db"
+    DATABASE_URL_AUTO_CREATE: str = "false"
 
     LLM_PROVIDER: str = "gemini"
     GEMINI_API_KEY: str = ""

@@ -1,4 +1,4 @@
-const API_BASE = 'http://127.0.0.1:8000/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://nexora-ai-rag-platform.onrender.com/api/v1';
 
 const getHeaders = (isJson = true) => {
   const token = localStorage.getItem('nexora_token');

@@ -5,11 +5,8 @@ import re
 import uuid
 from app.core.rag_config import rag_settings
 
-try:
-    from sentence_transformers import SentenceTransformer
-    HAS_SENTENCE_TRANSFORMERS = True
-except ImportError:
-    HAS_SENTENCE_TRANSFORMERS = False
+SentenceTransformer = None
+HAS_SENTENCE_TRANSFORMERS = True
 
 try:
     from qdrant_client import QdrantClient
@@ -82,25 +79,9 @@ def _fallback_embed(texts: list[str]) -> np.ndarray:
 
 class QdrantVectorStore:
     def __init__(self):
-        print(f"Loading embedding model: {rag_settings.EMBEDDING_MODEL_NAME}...")
         self.model = None
-        if HAS_SENTENCE_TRANSFORMERS:
-
-            try:
-                self.model = SentenceTransformer(rag_settings.EMBEDDING_MODEL_NAME)
-                print(f"SentenceTransformer ('{rag_settings.EMBEDDING_MODEL_NAME}') loaded successfully.")
-            except Exception as e:
-                print(f"SentenceTransformer load warning ({e}). Trying fallback load.")
-                try:
-                    self.model = SentenceTransformer(rag_settings.EMBEDDING_MODEL_NAME, local_files_only=True)
-                except Exception:
-                    self.model = None
-
-
-
-
-        if self.model is None:
-            print("Using fallback word-hash embedder (no SentenceTransformer).")
+        self._model_load_attempted = False
+        print(f"Embedding model deferred until first use: {rag_settings.EMBEDDING_MODEL_NAME}.")
 
         self.chunks: list[dict] = []
         self.embeddings: np.ndarray | None = None
@@ -111,8 +92,10 @@ class QdrantVectorStore:
         self.qdrant_client = None
         self.collection_name = getattr(rag_settings, "QDRANT_COLLECTION_NAME", "nexora_documents")
         self.use_qdrant = False
+        self._qdrant_init_attempted = False
 
-        self._init_qdrant()
+        if os.getenv("EAGER_QDRANT_INIT", "").lower() in {"1", "true", "yes"}:
+            self._ensure_qdrant_initialized()
         
         # Seed initial knowledge base document
         self.seed_sample_documents()
@@ -138,7 +121,7 @@ class QdrantVectorStore:
                         prefer_grpc=False
                     )
                     collections = [c.name for c in self.qdrant_client.get_collections().collections]
-                    sample_dim = len(self._encode_texts(["test"])[0])
+                    sample_dim = int(os.getenv("EMBEDDING_DIM", "384"))
 
                     if self.collection_name not in collections:
                         print(f"Creating Qdrant collection '{self.collection_name}' (vector dimension: {sample_dim})...")
@@ -167,6 +150,12 @@ class QdrantVectorStore:
             self.use_qdrant = False
         else:
             print("Qdrant Cloud credentials not specified. Operating in local vector store mode.")
+
+    def _ensure_qdrant_initialized(self):
+        if self._qdrant_init_attempted:
+            return
+        self._qdrant_init_attempted = True
+        self._init_qdrant()
 
     def _sync_from_qdrant(self):
         """Load indexed document metadata & chunks from Qdrant Cloud into memory."""
@@ -228,12 +217,43 @@ class QdrantVectorStore:
             self.query_history.pop()
 
     def _encode_texts(self, texts: list[str]) -> np.ndarray:
+        self._load_embedding_model()
         if self.model is not None:
             try:
                 return self.model.encode(texts, convert_to_numpy=True)
             except Exception:
                 pass
         return _fallback_embed(texts)
+
+    def _load_embedding_model(self):
+        global SentenceTransformer, HAS_SENTENCE_TRANSFORMERS
+
+        if self._model_load_attempted or not HAS_SENTENCE_TRANSFORMERS:
+            return
+
+        self._model_load_attempted = True
+        if os.getenv("DISABLE_SENTENCE_TRANSFORMERS", "").lower() in {"1", "true", "yes"}:
+            print("Using fallback word-hash embedder (sentence-transformers disabled).")
+            return
+
+        print(f"Loading embedding model: {rag_settings.EMBEDDING_MODEL_NAME}...")
+        try:
+            if SentenceTransformer is None:
+                from sentence_transformers import SentenceTransformer as _SentenceTransformer
+                SentenceTransformer = _SentenceTransformer
+            self.model = SentenceTransformer(rag_settings.EMBEDDING_MODEL_NAME)
+            print(f"SentenceTransformer ('{rag_settings.EMBEDDING_MODEL_NAME}') loaded successfully.")
+        except ImportError:
+            HAS_SENTENCE_TRANSFORMERS = False
+            self.model = None
+            print("Using fallback word-hash embedder (sentence-transformers not installed).")
+        except Exception as e:
+            print(f"SentenceTransformer load warning ({e}). Trying local cache.")
+            try:
+                self.model = SentenceTransformer(rag_settings.EMBEDDING_MODEL_NAME, local_files_only=True)
+            except Exception:
+                self.model = None
+                print("Using fallback word-hash embedder (no SentenceTransformer).")
 
     def add_document(self, doc_id: str, filename: str, page_count: int, chunks: list[dict], owner: str = "System Admin"):
         """Add chunks of a document to the vector store (Qdrant & Local fallback)."""
@@ -259,6 +279,7 @@ class QdrantVectorStore:
         }
 
         # Upsert into Qdrant Cloud if enabled
+        self._ensure_qdrant_initialized()
         if self.use_qdrant and self.qdrant_client and qmodels:
             try:
                 points = []
@@ -287,6 +308,7 @@ class QdrantVectorStore:
         query_vec = self._encode_texts([query])[0]
 
         # 1. Try Qdrant Cloud search first
+        self._ensure_qdrant_initialized()
         if self.use_qdrant and self.qdrant_client and qmodels:
             try:
                 query_filter = None
@@ -472,6 +494,7 @@ class QdrantVectorStore:
             del self.documents[doc_id]
 
         deleted_qdrant = False
+        self._ensure_qdrant_initialized()
         if self.use_qdrant and self.qdrant_client and qmodels:
             try:
                 filter_obj = qmodels.Filter(
@@ -512,10 +535,11 @@ class QdrantVectorStore:
         self.documents = {}
         self.query_history = []
 
+        self._ensure_qdrant_initialized()
         if self.use_qdrant and self.qdrant_client and qmodels:
             try:
                 self.qdrant_client.delete_collection(collection_name=self.collection_name)
-                sample_dim = len(self._encode_texts(["test"])[0])
+                sample_dim = int(os.getenv("EMBEDDING_DIM", "384"))
                 self.qdrant_client.create_collection(
                     collection_name=self.collection_name,
                     vectors_config=qmodels.VectorParams(size=sample_dim, distance=qmodels.Distance.COSINE)
@@ -525,6 +549,7 @@ class QdrantVectorStore:
                 print(f"Qdrant Cloud clear warning: {e}")
 
     def list_documents(self, owner: str | None = None) -> list[dict]:
+        self._ensure_qdrant_initialized()
         if owner and owner != "System Admin":
             return [doc for doc in self.documents.values() if doc.get("owner") == owner]
         return list(self.documents.values())
