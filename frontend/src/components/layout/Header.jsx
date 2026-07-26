@@ -95,7 +95,7 @@ export const Header = () => {
           onClick={() => setIsSearchOpen(true)}
           style={{
             width: '100%',
-            height: '34px',
+            height: '30px',
             backgroundColor: 'var(--surface-secondary)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-sm)',

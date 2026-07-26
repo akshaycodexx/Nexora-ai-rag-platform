@@ -10,6 +10,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  font-size: 13px;
+  zoom: 0.90;
+  -webkit-text-size-adjust: 100%;
+}
+
 html, body, #root {
   width: 100%;
   height: 100%;
@@ -69,3 +75,17 @@ html, body, #root {
   border-radius: var(--radius-sm);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
+
+/* Responsive Zoom & Screen Adaptation */
+@media (max-width: 1280px) {
+  .content-area {
+    padding: 10px 14px !important;
+  }
+}
+
+@media (max-height: 800px) {
+  .content-area {
+    padding: 8px 12px !important;
+  }
+}
+

@@ -6,13 +6,13 @@ export const Brand = ({ collapsed = false }) => {
     <div style={{
       display: 'flex',
       alignItems: 'center',
-      gap: '10px',
+      gap: '8px',
       overflow: 'hidden',
       userSelect: 'none'
     }}>
       <div style={{
-        width: '32px',
-        height: '32px',
+        width: '26px',
+        height: '26px',
         borderRadius: 'var(--radius-sm)',
         backgroundColor: 'var(--primary-tint)',
         border: '1px solid var(--border)',
@@ -22,11 +22,11 @@ export const Brand = ({ collapsed = false }) => {
         color: 'var(--primary)',
         flexShrink: 0
       }}>
-        <Layers size={18} strokeWidth={2.2} />
+        <Layers size={15} strokeWidth={2.2} />
       </div>
       {!collapsed && (
         <span style={{
-          fontSize: '1rem',
+          fontSize: '0.9rem',
           fontWeight: 700,
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',

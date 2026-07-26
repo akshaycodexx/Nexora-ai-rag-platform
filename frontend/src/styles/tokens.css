@@ -32,12 +32,12 @@
   --status-error-text: #dc2626;
 
   /* Dimensions & Spacing Grid (8px base) */
-  --sidebar-width: 210px;
-  --sidebar-collapsed-width: 60px;
-  --header-height: 48px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
+  --sidebar-width: 180px;
+  --sidebar-collapsed-width: 50px;
+  --header-height: 40px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
 
   /* Subtle shadow for elevated components only */
   --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.04);

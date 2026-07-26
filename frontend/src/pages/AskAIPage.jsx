@@ -196,33 +196,30 @@ export const AskAIPage = () => {
 
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', minHeight: 0, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1, minHeight: 0, overflow: 'hidden' }}>
       
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-        <div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-            AI & Knowledge / Ask AI
-          </div>
-          <h1 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+      {/* Ultra-Compact Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, padding: '2px 0 4px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+          <h1 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
             Ask AI Workspace
           </h1>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-            Multi-session RAG conversational assistant with persistent chat memory.
-          </p>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            Multi-session RAG assistant
+          </span>
         </div>
 
-        <Button variant="primary" size="sm" icon={Plus} onClick={handleCreateNewSession}>
+        <Button variant="primary" size="sm" icon={Plus} onClick={handleCreateNewSession} style={{ padding: '4px 10px', fontSize: '0.75rem', height: '28px' }}>
           New Chat
         </Button>
       </div>
 
       {/* Main Layout: Left Session History Drawer + Center Chat Workspace + Right Inspection Panel */}
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
         
         {/* Left Chat Sessions Sidebar */}
         <div style={{
-          width: isSidebarOpen ? '220px' : '46px',
+          width: isSidebarOpen ? '180px' : '38px',
           backgroundColor: 'var(--surface)',
           border: '1px solid var(--border)',
           borderRadius: 'var(--radius-md)',
@@ -347,10 +344,10 @@ export const AskAIPage = () => {
         </div>
 
         {/* Center Main Chat Messages & Question Composer Workspace */}
-        <Card style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden' }}>
+        <Card style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden', padding: '10px 12px', gap: '6px' }}>
           
           {/* Scrollable Conversation Stream */}
-          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', paddingRight: '4px', marginBottom: '10px' }}>
+          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', paddingRight: '4px', marginBottom: '4px' }}>
             {activeSession.messages.length === 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, color: 'var(--text-muted)', gap: '8px', paddingTop: '40px' }}>
                 <Bot size={32} style={{ color: 'var(--primary)' }} />
@@ -412,7 +409,7 @@ export const AskAIPage = () => {
           </div>
 
           {/* Question Composer Form */}
-          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '10px', flexShrink: 0 }}>
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '6px', flexShrink: 0 }}>
             <QuestionComposer onSubmit={handleQuerySubmit} loading={loading} />
           </div>
         </Card>

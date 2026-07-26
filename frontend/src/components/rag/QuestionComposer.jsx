@@ -48,7 +48,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
       <div style={{ position: 'relative' }}>
         <textarea
           value={question}
@@ -56,13 +56,13 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
           placeholder="Ask a question about your knowledge base... (Press Ctrl+Enter to submit)"
           style={{
             width: '100%',
-            minHeight: '72px',
-            maxHeight: '96px',
+            minHeight: '40px',
+            maxHeight: '58px',
             backgroundColor: 'var(--surface-secondary)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-md)',
-            padding: '10px 12px',
-            fontSize: '0.85rem',
+            padding: '6px 8px',
+            fontSize: '0.8rem',
             color: 'var(--text-primary)',
             outline: 'none',
             resize: 'none',
@@ -78,11 +78,11 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
       </div>
 
       {/* Control Bar Below Textarea */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'nowrap', gap: '8px', position: 'relative' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap', minWidth: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', minWidth: 0, flex: 1 }}>
           
           {/* Document Scope Toggle (All vs Selective) */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'relative' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', position: 'relative', flex: '1 1 auto', minWidth: '130px', maxWidth: '210px' }}>
             <Database size={14} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
             <select
               value={searchScope}
@@ -96,9 +96,9 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 backgroundColor: 'var(--surface)',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-sm)',
-                width: '230px',
-                padding: '5px 8px',
-                fontSize: '0.775rem',
+                width: '100%',
+                padding: '4px 6px',
+                fontSize: '0.75rem',
                 color: 'var(--text-secondary)',
                 outline: 'none',
                 fontWeight: 600,
@@ -117,14 +117,15 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                   background: 'var(--surface-secondary)',
                   border: '1px solid var(--border)',
                   borderRadius: 'var(--radius-sm)',
-                  padding: '4px 8px',
-                  fontSize: '0.75rem',
+                  padding: '3px 6px',
+                  fontSize: '0.725rem',
                   fontWeight: 600,
                   color: 'var(--primary)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '4px'
+                  gap: '3px',
+                  flexShrink: 0
                 }}
               >
                 <span>Files ({selectedDocIds.length})</span>
@@ -241,7 +242,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
           </div>
 
           {/* Model Selector */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flex: '1 1 auto', minWidth: '120px', maxWidth: '180px' }}>
             <Cpu size={14} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
             <select
               value={model}
@@ -250,9 +251,9 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 backgroundColor: 'var(--surface)',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-sm)',
-                width: '190px',
-                padding: '5px 8px',
-                fontSize: '0.775rem',
+                width: '100%',
+                padding: '4px 6px',
+                fontSize: '0.75rem',
                 color: 'var(--text-secondary)',
                 outline: 'none',
                 fontWeight: 600,
@@ -274,7 +275,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
           loading={loading}
           disabled={!question.trim()}
           icon={Send}
-          style={{ flexShrink: 0 }}
+          style={{ flexShrink: 0, height: '26px', padding: '0 10px', fontSize: '0.725rem' }}
         >
           Ask
         </Button>

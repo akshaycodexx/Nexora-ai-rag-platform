@@ -23,11 +23,13 @@ export const AppShell = () => {
         <Header />
         <main style={{
           flex: 1,
-          padding: '18px 22px',
+          padding: '6px 12px',
           maxWidth: '1600px',
           width: '100%',
           margin: '0 auto',
           minHeight: 0,
+          display: 'flex',
+          flexDirection: 'column',
           overflowY: 'auto',
           overflowX: 'hidden'
         }} className="content-area">
