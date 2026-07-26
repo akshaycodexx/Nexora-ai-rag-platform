@@ -35,7 +35,7 @@ export const QueryActivityChart = ({
 
   // Generate SVG Path
   const width = 500;
-  const height = 140;
+  const height = 118;
   const stepX = width / (currentPoints.length - 1 || 1);
   const pathD = currentPoints.map((p, i) => {
     const x = i * stepX;
@@ -87,7 +87,7 @@ export const QueryActivityChart = ({
 
       {/* Lightweight SVG Line Chart */}
       <div style={{ marginTop: '12px', width: '100%', overflowX: 'hidden' }}>
-        <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: '140px', overflow: 'visible' }}>
+        <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: '118px', overflow: 'visible' }}>
           {/* Grid lines */}
           <line x1="0" y1="20" x2={width} y2="20" stroke="var(--border)" strokeDasharray="3 3" strokeWidth="1" />
           <line x1="0" y1="70" x2={width} y2="70" stroke="var(--border)" strokeDasharray="3 3" strokeWidth="1" />
@@ -135,7 +135,7 @@ export const QueryActivityChart = ({
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '24px',
+        gap: '18px',
         borderTop: '1px solid var(--border)',
         paddingTop: '12px',
         marginTop: '8px'

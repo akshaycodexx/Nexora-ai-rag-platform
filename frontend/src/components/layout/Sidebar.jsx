@@ -87,7 +87,7 @@ export const Sidebar = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: collapsed ? 'center' : 'flex-start',
-              padding: collapsed ? '0' : '0 16px',
+              padding: collapsed ? '0' : '0 14px',
               borderBottom: '1px solid var(--border)'
             }}>
               <Brand collapsed={collapsed} />
@@ -123,9 +123,9 @@ export const Sidebar = () => {
           </div>
 
           {/* Grouped Navigation Links */}
-          <nav style={{ padding: '12px 8px' }}>
+          <nav style={{ padding: '10px 8px' }}>
             {navGroups.map((group, idx) => (
-              <div key={idx} style={{ marginBottom: '16px' }}>
+              <div key={idx} style={{ marginBottom: '12px' }}>
                 {!collapsed && (
                   <div style={{
                     fontSize: '0.675rem',
@@ -152,12 +152,12 @@ export const Sidebar = () => {
                           display: 'flex',
                           alignItems: 'center',
                           gap: '10px',
-                          height: '36px',
+                          height: '32px',
                           padding: collapsed ? '0 14px' : '0 12px',
                           justifyContent: collapsed ? 'center' : 'flex-start',
                           borderRadius: 'var(--radius-sm)',
                           textDecoration: 'none',
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           fontWeight: isActive ? 600 : 500,
                           color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
                           backgroundColor: isActive ? 'var(--primary-tint)' : 'transparent',
@@ -166,7 +166,7 @@ export const Sidebar = () => {
                           position: 'relative'
                         })}
                       >
-                        <Icon size={18} strokeWidth={2} style={{ flexShrink: 0 }} />
+                        <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
                         {!collapsed && <span>{item.label}</span>}
                       </NavLink>
                     );
@@ -180,7 +180,7 @@ export const Sidebar = () => {
         {/* Footer info */}
         {!collapsed && (
           <div style={{
-            padding: '12px 16px',
+            padding: '10px 14px',
             borderTop: '1px solid var(--border)',
             fontSize: '0.725rem',
             color: 'var(--text-muted)',

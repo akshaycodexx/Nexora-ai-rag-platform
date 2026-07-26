@@ -7,8 +7,8 @@ export const SystemHealth = ({ systemHealth = [] }) => {
   const displayItems = systemHealth && systemHealth.length > 0 ? systemHealth : mockSystemHealth;
 
   return (
-    <Card style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <div style={{ paddingBottom: '8px', borderBottom: '1px solid var(--border)' }}>
+    <Card style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div style={{ paddingBottom: '6px', borderBottom: '1px solid var(--border)' }}>
         <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>
           System Health
         </h3>
@@ -18,7 +18,7 @@ export const SystemHealth = ({ systemHealth = [] }) => {
       </div>
 
       {/* Scrollable Container */}
-      <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', paddingRight: '4px' }}>
+      <div style={{ maxHeight: '238px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', paddingRight: '4px' }}>
         {displayItems.map((item, idx) => (
           <div
             key={idx}
@@ -26,7 +26,7 @@ export const SystemHealth = ({ systemHealth = [] }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '8px 12px',
+              padding: '7px 10px',
               backgroundColor: 'var(--surface-secondary)',
               borderRadius: 'var(--radius-sm)',
               border: '1px solid var(--border)'

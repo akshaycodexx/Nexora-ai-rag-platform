@@ -7,11 +7,11 @@ export const Card = ({ children, style = {}, className = '', ...props }) => {
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-lg)',
-        padding: '20px',
+        padding: '16px',
         boxShadow: 'var(--shadow-subtle)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px',
+        gap: '12px',
         ...style
       }}
       className={className}

@@ -46,15 +46,15 @@ export const OverviewPage = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       
       {/* Content Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
         <div>
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
             Workspace / Overview
           </div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             Overview
           </h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
@@ -73,7 +73,7 @@ export const OverviewPage = () => {
       </div>
 
       {/* 4 Compact Metric Cards (100% Dynamic from API) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '12px' }}>
         {displayMetrics.map((m, i) => (
           <MetricCard
             key={i}
@@ -87,7 +87,7 @@ export const OverviewPage = () => {
       </div>
 
       {/* Main Grid: Left (~65%) Query Activity Chart & Right (~35%) System Health */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: '16px' }} className="overview-main-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: '12px' }} className="overview-main-grid">
         <QueryActivityChart
           chartData7d={dashboardData?.chart_data_7d}
           chartData30d={dashboardData?.chart_data_30d}
@@ -99,7 +99,7 @@ export const OverviewPage = () => {
       </div>
 
       {/* Next Row: Left Recent Documents & Right Recent Queries */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: '16px' }} className="overview-sub-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: '12px' }} className="overview-sub-grid">
         <RecentDocumentsTable documents={documents} onDelete={handleDelete} />
         <RecentQueriesList queries={dashboardData?.recent_queries} />
       </div>

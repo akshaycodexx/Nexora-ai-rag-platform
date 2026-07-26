@@ -66,14 +66,14 @@ export const Header = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 24px',
+      padding: '0 18px',
       position: 'sticky',
       top: 0,
       flexShrink: 0,
       zIndex: 40
     }}>
       {/* Left: Mobile Toggle & Global Search */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1, maxWidth: '480px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, maxWidth: '440px' }}>
         <button
           onClick={toggleMobile}
           aria-label="Toggle mobile menu"
@@ -129,7 +129,7 @@ export const Header = () => {
       </div>
 
       {/* Right Actions: Status Indicator, Bell, SINGLE Theme Toggle, User Avatar & Logout */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         
         {/* System Status Indicator */}
         <div style={{
@@ -141,7 +141,7 @@ export const Header = () => {
           color: 'var(--text-secondary)',
           backgroundColor: 'var(--surface-secondary)',
           border: '1px solid var(--border)',
-          padding: '0.35rem 0.75rem',
+            padding: '0.28rem 0.65rem',
           borderRadius: '20px'
         }}>
           <span style={{
@@ -160,8 +160,8 @@ export const Header = () => {
             background: 'none',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-sm)',
-            width: '34px',
-            height: '34px',
+            width: '32px',
+            height: '32px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -191,8 +191,8 @@ export const Header = () => {
             background: 'none',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-sm)',
-            width: '34px',
-            height: '34px',
+            width: '32px',
+            height: '32px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

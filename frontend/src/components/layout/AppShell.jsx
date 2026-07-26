@@ -23,7 +23,7 @@ export const AppShell = () => {
         <Header />
         <main style={{
           flex: 1,
-          padding: '24px',
+          padding: '18px 22px',
           maxWidth: '1600px',
           width: '100%',
           margin: '0 auto',

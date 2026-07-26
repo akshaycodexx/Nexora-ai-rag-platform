@@ -7,10 +7,10 @@ export const MetricCard = ({ label, value, change, isPositive = true, icon: Icon
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-lg)',
-        padding: '16px 20px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
+        gap: '6px',
         boxShadow: 'var(--shadow-subtle)'
       }}
     >
@@ -21,7 +21,7 @@ export const MetricCard = ({ label, value, change, isPositive = true, icon: Icon
         {Icon && <Icon size={16} style={{ color: 'var(--text-muted)' }} strokeWidth={2} />}
       </div>
 
-      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
         {value}
       </div>
 

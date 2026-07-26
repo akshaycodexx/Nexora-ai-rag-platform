@@ -32,9 +32,9 @@
   --status-error-text: #dc2626;
 
   /* Dimensions & Spacing Grid (8px base) */
-  --sidebar-width: 240px;
-  --sidebar-collapsed-width: 68px;
-  --header-height: 56px;
+  --sidebar-width: 210px;
+  --sidebar-collapsed-width: 60px;
+  --header-height: 48px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 12px;
