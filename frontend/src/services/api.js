@@ -12,14 +12,32 @@ const getHeaders = (isJson = true) => {
   return headers;
 };
 
+const getErrorMessage = async (res, fallback) => {
+  try {
+    const err = await res.json();
+    return err.detail || err.message || fallback;
+  } catch (e) {
+    return fallback;
+  }
+};
+
+const getCurrentUser = () => {
+  try {
+    const savedUser = localStorage.getItem('nexora_user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  } catch (e) {
+    return null;
+  }
+};
+
 export const apiService = {
   // Dashboard Overview
   async getDashboardOverview() {
     try {
-      const savedUser = localStorage.getItem('nexora_user');
-      const userObj = savedUser ? JSON.parse(savedUser) : null;
+      const userObj = getCurrentUser();
       const ownerParam = userObj ? (userObj.username || userObj.email) : '';
-      const url = ownerParam ? `${API_BASE}/dashboard/overview?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/dashboard/overview`;
+      const isAdmin = String(userObj?.role || '').toLowerCase() === 'admin';
+      const url = ownerParam && !isAdmin ? `${API_BASE}/dashboard/overview?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/dashboard/overview`;
 
       const res = await fetch(url, { headers: getHeaders() });
       if (res.ok) return await res.json();
@@ -32,10 +50,10 @@ export const apiService = {
   // Documents & Collections
   async getDocuments() {
     try {
-      const savedUser = localStorage.getItem('nexora_user');
-      const userObj = savedUser ? JSON.parse(savedUser) : null;
+      const userObj = getCurrentUser();
       const ownerParam = userObj ? (userObj.username || userObj.email) : '';
-      const url = ownerParam ? `${API_BASE}/rag/documents?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/rag/documents`;
+      const isAdmin = String(userObj?.role || '').toLowerCase() === 'admin';
+      const url = ownerParam && !isAdmin ? `${API_BASE}/rag/documents?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/rag/documents`;
 
       const res = await fetch(url, { headers: getHeaders() });
       if (res.ok) {
@@ -43,7 +61,7 @@ export const apiService = {
         return data.documents || [];
       }
     } catch (e) {
-      console.warn("Backend API unavailable, using fallback documents.");
+      console.warn("Could not fetch documents from backend.", e);
     }
     return [];
   },
@@ -52,8 +70,7 @@ export const apiService = {
     const formData = new FormData();
     formData.append('file', file);
 
-    const savedUser = localStorage.getItem('nexora_user');
-    const userObj = savedUser ? JSON.parse(savedUser) : null;
+    const userObj = getCurrentUser();
     const ownerName = userObj ? (userObj.username || userObj.email) : 'System Admin';
 
     try {
@@ -65,19 +82,9 @@ export const apiService = {
         body: formData
       });
       if (res.ok) return await res.json();
-      const err = await res.json();
-      throw new Error(err.detail || 'Upload failed');
+      throw new Error(await getErrorMessage(res, 'Upload failed'));
     } catch (e) {
-      if (e.message.includes('Upload failed') || e.message.includes('Unsupported')) {
-        throw e;
-      }
-      return {
-        doc_id: `doc_${Date.now()}`,
-        filename: file.name,
-        page_count: 5,
-        chunk_count: 18,
-        message: `Successfully indexed '${file.name}'`
-      };
+      throw new Error(e.message || 'Could not reach backend upload service');
     }
   },
 
@@ -118,25 +125,10 @@ export const apiService = {
         body: JSON.stringify({ question, top_k, llm_provider, api_key, doc_ids })
       });
       if (res.ok) return await res.json();
+      throw new Error(await getErrorMessage(res, 'RAG query failed'));
     } catch (e) {
-      console.warn("Backend API query fallback");
+      throw new Error(e.message || 'Could not reach backend RAG service');
     }
-    return {
-      answer: `Based strictly on the indexed organizational documents:\n\nThe authentication flow uses OAuth2 Bearer JSON Web Tokens (JWT) with HS256 signature algorithm. Password hashing is enforced via Bcrypt. Access tokens expire in 30 minutes while refresh tokens persist for 7 days.`,
-      is_hallucination_guarded: false,
-      confidence_score: 0.94,
-      llm_used: "Google Gemini 1.5 Flash (Extractive)",
-      sources: [
-        {
-          filename: "api-documentation.docx",
-          page_number: 3,
-          location: "Section: Auth Architecture",
-          chunk_index: 4,
-          similarity_score: 0.942,
-          snippet: "The authentication system implements OAuth2 Bearer tokens with HS256 encryption. Passwords are hashed using Passlib Bcrypt before persisting to SQLite."
-        }
-      ]
-    };
   },
 
   // Guardrails

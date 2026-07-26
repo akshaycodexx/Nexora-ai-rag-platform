@@ -232,8 +232,8 @@ class QdrantVectorStore:
             return
 
         self._model_load_attempted = True
-        if os.getenv("DISABLE_SENTENCE_TRANSFORMERS", "").lower() in {"1", "true", "yes"}:
-            print("Using fallback word-hash embedder (sentence-transformers disabled).")
+        if os.getenv("ENABLE_SENTENCE_TRANSFORMERS", "").lower() not in {"1", "true", "yes"}:
+            print("Using fallback word-hash embedder (sentence-transformers disabled by default).")
             return
 
         print(f"Loading embedding model: {rag_settings.EMBEDDING_MODEL_NAME}...")

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Card } from '../ui/Card';
-import { mockRecentQueries } from '../../data/mockData';
 import { MessageSquare, Clock, FileCheck } from 'lucide-react';
 
 export const RecentQueriesList = ({ queries = [] }) => {
-  const displayQueries = queries && queries.length > 0 ? queries : mockRecentQueries;
+  const displayQueries = queries || [];
 
   return (
     <Card style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -19,7 +18,11 @@ export const RecentQueriesList = ({ queries = [] }) => {
 
       {/* Scrollable Container */}
       <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', paddingRight: '4px' }}>
-        {displayQueries.map((q, index) => (
+        {displayQueries.length === 0 ? (
+          <div style={{ padding: '28px 12px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+            No queries yet. Ask a question after uploading documents.
+          </div>
+        ) : displayQueries.map((q, index) => (
           <div
             key={q.id || index}
             style={{

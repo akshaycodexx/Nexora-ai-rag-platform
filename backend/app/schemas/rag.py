@@ -11,6 +11,7 @@ class RAGQueryRequest(BaseModel):
 class SourceCitation(BaseModel):
     filename: str
     page_number: int
+    location: Optional[str] = None
     chunk_index: int
     similarity_score: float
     snippet: str
