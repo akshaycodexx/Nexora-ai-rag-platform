@@ -305,6 +305,9 @@ class QdrantVectorStore:
 
     def search(self, query: str, top_k: int = 4, doc_ids: list[str] | None = None) -> list[tuple[dict, float]]:
         """Search top-k relevant chunks filtered by optional doc_ids."""
+        if doc_ids is not None and len(doc_ids) == 0:
+            return []
+
         query_vec = self._encode_texts([query])[0]
 
         # 1. Try Qdrant Cloud search first

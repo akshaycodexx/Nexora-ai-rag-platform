@@ -30,14 +30,17 @@ const getCurrentUser = () => {
   }
 };
 
+const getOwnerParam = () => {
+  const userObj = getCurrentUser();
+  return userObj ? (userObj.email || userObj.id || userObj.username) : '';
+};
+
 export const apiService = {
   // Dashboard Overview
   async getDashboardOverview() {
     try {
-      const userObj = getCurrentUser();
-      const ownerParam = userObj ? (userObj.username || userObj.email) : '';
-      const isAdmin = String(userObj?.role || '').toLowerCase() === 'admin';
-      const url = ownerParam && !isAdmin ? `${API_BASE}/dashboard/overview?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/dashboard/overview`;
+      const ownerParam = getOwnerParam();
+      const url = ownerParam ? `${API_BASE}/dashboard/overview?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/dashboard/overview`;
 
       const res = await fetch(url, { headers: getHeaders() });
       if (res.ok) return await res.json();
@@ -50,10 +53,8 @@ export const apiService = {
   // Documents & Collections
   async getDocuments() {
     try {
-      const userObj = getCurrentUser();
-      const ownerParam = userObj ? (userObj.username || userObj.email) : '';
-      const isAdmin = String(userObj?.role || '').toLowerCase() === 'admin';
-      const url = ownerParam && !isAdmin ? `${API_BASE}/rag/documents?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/rag/documents`;
+      const ownerParam = getOwnerParam();
+      const url = ownerParam ? `${API_BASE}/rag/documents?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/rag/documents`;
 
       const res = await fetch(url, { headers: getHeaders() });
       if (res.ok) {
@@ -70,8 +71,7 @@ export const apiService = {
     const formData = new FormData();
     formData.append('file', file);
 
-    const userObj = getCurrentUser();
-    const ownerName = userObj ? (userObj.username || userObj.email) : 'System Admin';
+    const ownerName = getOwnerParam() || 'anonymous';
 
     try {
       const token = localStorage.getItem('nexora_token');
@@ -100,9 +100,7 @@ export const apiService = {
 
   async getCollections() {
     try {
-      const savedUser = localStorage.getItem('nexora_user');
-      const userObj = savedUser ? JSON.parse(savedUser) : null;
-      const ownerParam = userObj ? (userObj.username || userObj.email) : '';
+      const ownerParam = getOwnerParam();
       const url = ownerParam ? `${API_BASE}/rag/collections?owner=${encodeURIComponent(ownerParam)}` : `${API_BASE}/rag/collections`;
 
       const res = await fetch(url, { headers: getHeaders() });

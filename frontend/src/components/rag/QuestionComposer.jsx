@@ -43,7 +43,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
     onSubmit({
       question: submittedQuestion,
       model,
-      doc_ids: searchScope === 'selective' ? selectedDocIds : null
+      doc_ids: searchScope === 'selective' ? selectedDocIds : documents.map(d => d.doc_id)
     });
   };
 

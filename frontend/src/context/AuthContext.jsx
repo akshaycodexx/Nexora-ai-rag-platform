@@ -27,7 +27,14 @@ export const AuthProvider = ({ children }) => {
       const saved = localStorage.getItem('nexora_user');
       if (saved) {
         try {
-          setUser(JSON.parse(saved));
+          const savedUser = JSON.parse(saved);
+          const normalizedUser = {
+            ...savedUser,
+            username: savedUser.email || savedUser.username,
+            role: 'user'
+          };
+          localStorage.setItem('nexora_user', JSON.stringify(normalizedUser));
+          setUser(normalizedUser);
         } catch (e) {
           console.error("Error parsing saved user", e);
         }
@@ -55,8 +62,9 @@ export const AuthProvider = ({ children }) => {
     const userObj = {
       id: firebaseUser.uid,
       email: firebaseUser.email,
-      username: firebaseUser.displayName || firebaseUser.email.split('@')[0],
-      role: 'admin',
+      username: firebaseUser.email,
+      displayName: firebaseUser.displayName || firebaseUser.email.split('@')[0],
+      role: 'user',
       avatar: firebaseUser.photoURL
     };
     const fbToken = 'firebase_token_' + firebaseUser.uid;
