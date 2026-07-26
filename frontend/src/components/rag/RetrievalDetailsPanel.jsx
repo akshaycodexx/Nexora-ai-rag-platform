@@ -58,7 +58,7 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
   };
 
   return (
-    <Card style={{ width: '340px', flexShrink: 0, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <Card style={{ width: '300px', flexShrink: 0, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
       
       {/* Panel Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
@@ -87,8 +87,8 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '6px',
-        padding: '10px',
-        marginTop: '8px',
+        padding: '8px',
+        marginTop: '6px',
         backgroundColor: 'var(--surface-secondary)',
         borderRadius: 'var(--radius-sm)',
         border: '1px solid var(--border)',
@@ -112,7 +112,7 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
         padding: '4px',
         backgroundColor: 'var(--surface-secondary)',
         borderRadius: 'var(--radius-sm)',
-        marginTop: '8px',
+        marginTop: '6px',
         border: '1px solid var(--border)',
         flexShrink: 0
       }}>
@@ -166,7 +166,7 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
       </div>
 
       {/* Main Tab Content */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', paddingTop: '8px', paddingRight: '2px' }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', paddingTop: '6px', paddingRight: '2px' }}>
         
         {/* TAB 1: RETRIEVED CHUNKS */}
         {activeTab === 'chunks' && (
@@ -183,7 +183,7 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
                     onClick={() => onPreview && onPreview(s)}
                     style={{
                       fontSize: '0.75rem',
-                      padding: '10px 12px',
+                      padding: '8px 10px',
                       backgroundColor: 'var(--surface-secondary)',
                       border: '1px solid var(--border)',
                       borderRadius: 'var(--radius-sm)',

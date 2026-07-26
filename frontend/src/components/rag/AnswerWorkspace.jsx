@@ -113,9 +113,9 @@ export const AnswerWorkspace = ({ response, onPreview }) => {
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      gap: '16px',
-      marginTop: '16px',
-      paddingTop: '16px',
+      gap: '12px',
+      marginTop: '10px',
+      paddingTop: '10px',
       borderTop: '1px solid var(--border)'
     }}>
       {/* Answer Header Bar & Meta Badges */}
@@ -151,10 +151,10 @@ export const AnswerWorkspace = ({ response, onPreview }) => {
         backgroundColor: isGuarded ? 'var(--status-warning-bg)' : 'var(--surface-secondary)',
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-md)',
-        padding: '20px 22px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px'
+        gap: '10px'
       }}>
         {/* Title Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
@@ -183,7 +183,7 @@ export const AnswerWorkspace = ({ response, onPreview }) => {
         </div>
 
         {/* Formatted Content Lines */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {lines.map((line, idx) => {
             const isHeader = line.endsWith(':') && line.length < 40 && !line.includes('Technologies');
             const isBullet = line.startsWith('- ') || line.startsWith('* ');

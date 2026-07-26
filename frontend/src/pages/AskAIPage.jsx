@@ -196,7 +196,7 @@ export const AskAIPage = () => {
 
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%', minHeight: 0, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', minHeight: 0, overflow: 'hidden' }}>
       
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
@@ -204,7 +204,7 @@ export const AskAIPage = () => {
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
             AI & Knowledge / Ask AI
           </div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             Ask AI Workspace
           </h1>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
@@ -212,17 +212,17 @@ export const AskAIPage = () => {
           </p>
         </div>
 
-        <Button variant="primary" icon={Plus} onClick={handleCreateNewSession}>
+        <Button variant="primary" size="sm" icon={Plus} onClick={handleCreateNewSession}>
           New Chat
         </Button>
       </div>
 
       {/* Main Layout: Left Session History Drawer + Center Chat Workspace + Right Inspection Panel */}
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
         
         {/* Left Chat Sessions Sidebar */}
         <div style={{
-          width: isSidebarOpen ? '240px' : '52px',
+          width: isSidebarOpen ? '220px' : '46px',
           backgroundColor: 'var(--surface)',
           border: '1px solid var(--border)',
           borderRadius: 'var(--radius-md)',
@@ -235,7 +235,7 @@ export const AskAIPage = () => {
         }}>
           {/* Sidebar Header */}
           <div style={{
-            padding: isSidebarOpen ? '12px' : '10px 4px',
+            padding: isSidebarOpen ? '10px' : '8px 4px',
             borderBottom: '1px solid var(--border)',
             display: 'flex',
             alignItems: 'center',
@@ -275,7 +275,7 @@ export const AskAIPage = () => {
               title="New Thread"
               style={{
                 width: '100%',
-                padding: '8px 10px',
+                padding: '7px 8px',
                 backgroundColor: 'var(--surface-secondary)',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-sm)',
@@ -350,7 +350,7 @@ export const AskAIPage = () => {
         <Card style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden' }}>
           
           {/* Scrollable Conversation Stream */}
-          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', paddingRight: '4px', marginBottom: '16px' }}>
+          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', paddingRight: '4px', marginBottom: '10px' }}>
             {activeSession.messages.length === 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, color: 'var(--text-muted)', gap: '8px', paddingTop: '40px' }}>
                 <Bot size={32} style={{ color: 'var(--primary)' }} />
@@ -412,7 +412,7 @@ export const AskAIPage = () => {
           </div>
 
           {/* Question Composer Form */}
-          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '12px', flexShrink: 0 }}>
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '10px', flexShrink: 0 }}>
             <QuestionComposer onSubmit={handleQuerySubmit} loading={loading} />
           </div>
         </Card>

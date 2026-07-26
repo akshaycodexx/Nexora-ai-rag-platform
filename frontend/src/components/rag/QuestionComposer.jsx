@@ -48,7 +48,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       <div style={{ position: 'relative' }}>
         <textarea
           value={question}
@@ -56,13 +56,13 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
           placeholder="Ask a question about your knowledge base... (Press Ctrl+Enter to submit)"
           style={{
             width: '100%',
-            minHeight: '110px',
-            maxHeight: '150px',
+            minHeight: '72px',
+            maxHeight: '96px',
             backgroundColor: 'var(--surface-secondary)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-md)',
-            padding: '14px 16px',
-            fontSize: '0.925rem',
+            padding: '10px 12px',
+            fontSize: '0.85rem',
             color: 'var(--text-primary)',
             outline: 'none',
             resize: 'none',
@@ -78,8 +78,8 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
       </div>
 
       {/* Control Bar Below Textarea */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', position: 'relative' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'nowrap', gap: '8px', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap', minWidth: 0 }}>
           
           {/* Document Scope Toggle (All vs Selective) */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'relative' }}>
@@ -96,7 +96,8 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 backgroundColor: 'var(--surface)',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '5px 10px',
+                width: '230px',
+                padding: '5px 8px',
                 fontSize: '0.775rem',
                 color: 'var(--text-secondary)',
                 outline: 'none',
@@ -104,8 +105,8 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 cursor: 'pointer'
               }}
             >
-              <option value="all">Search Mode: All Documents ({documents.length})</option>
-              <option value="selective">Search Mode: Selective Documents ({selectedDocIds.length} Selected)</option>
+              <option value="all">All Docs ({documents.length})</option>
+              <option value="selective">Selected Docs ({selectedDocIds.length})</option>
             </select>
 
             {searchScope === 'selective' && (
@@ -116,7 +117,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                   background: 'var(--surface-secondary)',
                   border: '1px solid var(--border)',
                   borderRadius: 'var(--radius-sm)',
-                  padding: '4px 10px',
+                  padding: '4px 8px',
                   fontSize: '0.75rem',
                   fontWeight: 600,
                   color: 'var(--primary)',
@@ -126,7 +127,7 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                   gap: '4px'
                 }}
               >
-                <span>Select Files ({selectedDocIds.length})</span>
+                <span>Files ({selectedDocIds.length})</span>
                 <ChevronDown size={12} />
               </button>
             )}
@@ -249,7 +250,8 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 backgroundColor: 'var(--surface)',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '5px 10px',
+                width: '190px',
+                padding: '5px 8px',
                 fontSize: '0.775rem',
                 color: 'var(--text-secondary)',
                 outline: 'none',
@@ -257,9 +259,9 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
                 cursor: 'pointer'
               }}
             >
-              <option value="gemini">Google Gemini 1.5 Flash</option>
-              <option value="openai">OpenAI GPT-3.5 Turbo</option>
-              <option value="extractive">Extractive Engine (No Key)</option>
+              <option value="gemini">Gemini 1.5 Flash</option>
+              <option value="openai">OpenAI GPT-3.5</option>
+              <option value="extractive">Extractive Engine</option>
             </select>
           </div>
         </div>
@@ -268,11 +270,13 @@ export const QuestionComposer = ({ onSubmit, loading = false }) => {
         <Button
           type="submit"
           variant="primary"
+          size="sm"
           loading={loading}
           disabled={!question.trim()}
           icon={Send}
+          style={{ flexShrink: 0 }}
         >
-          Ask RAG Engine
+          Ask
         </Button>
       </div>
     </form>
