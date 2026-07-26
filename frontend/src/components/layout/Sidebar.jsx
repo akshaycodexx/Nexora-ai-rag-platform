@@ -151,13 +151,13 @@ export const Sidebar = () => {
                         style={({ isActive }) => ({
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '8px',
-                          height: '28px',
-                          padding: collapsed ? '0 10px' : '0 10px',
+                          gap: '10px',
+                          height: '32px',
+                          padding: collapsed ? '0 14px' : '0 12px',
                           justifyContent: collapsed ? 'center' : 'flex-start',
                           borderRadius: 'var(--radius-sm)',
                           textDecoration: 'none',
-                          fontSize: '0.76rem',
+                          fontSize: '0.8rem',
                           fontWeight: isActive ? 600 : 500,
                           color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
                           backgroundColor: isActive ? 'var(--primary-tint)' : 'transparent',
@@ -166,7 +166,7 @@ export const Sidebar = () => {
                           position: 'relative'
                         })}
                       >
-                        <Icon size={14} strokeWidth={2} style={{ flexShrink: 0 }} />
+                        <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
                         {!collapsed && <span>{item.label}</span>}
                       </NavLink>
                     );

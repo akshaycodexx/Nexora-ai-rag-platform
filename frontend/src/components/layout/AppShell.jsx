@@ -23,10 +23,9 @@ export const AppShell = () => {
         <Header />
         <main style={{
           flex: 1,
-          padding: '6px 12px',
-          maxWidth: '1600px',
+          padding: '14px 20px',
           width: '100%',
-          margin: '0 auto',
+          boxSizing: 'border-box',
           minHeight: 0,
           display: 'flex',
           flexDirection: 'column',

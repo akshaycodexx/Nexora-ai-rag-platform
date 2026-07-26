@@ -58,7 +58,7 @@ export const RetrievalDetailsPanel = ({ response, onPreview }) => {
   };
 
   return (
-    <Card style={{ width: '260px', flexShrink: 0, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <Card style={{ width: '280px', flexShrink: 0, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
       
       {/* Panel Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>

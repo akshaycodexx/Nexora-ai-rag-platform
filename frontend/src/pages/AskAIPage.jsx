@@ -196,30 +196,33 @@ export const AskAIPage = () => {
 
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: 1, minHeight: 0, overflow: 'hidden' }}>
       
-      {/* Ultra-Compact Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, padding: '2px 0 4px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <h1 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+        <div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '2px' }}>
+            AI & Knowledge / Ask AI
+          </div>
+          <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
             Ask AI Workspace
           </h1>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            Multi-session RAG assistant
-          </span>
+          <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', marginTop: '2px', marginBottom: 0 }}>
+            Multi-session RAG conversational assistant with persistent chat memory.
+          </p>
         </div>
 
-        <Button variant="primary" size="sm" icon={Plus} onClick={handleCreateNewSession} style={{ padding: '4px 10px', fontSize: '0.75rem', height: '28px' }}>
+        <Button variant="primary" size="sm" icon={Plus} onClick={handleCreateNewSession}>
           New Chat
         </Button>
       </div>
 
       {/* Main Layout: Left Session History Drawer + Center Chat Workspace + Right Inspection Panel */}
-      <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', gap: '10px', alignItems: 'stretch', flex: 1, minHeight: 0, overflow: 'hidden' }}>
         
         {/* Left Chat Sessions Sidebar */}
         <div style={{
-          width: isSidebarOpen ? '180px' : '38px',
+          width: isSidebarOpen ? '200px' : '44px',
           backgroundColor: 'var(--surface)',
           border: '1px solid var(--border)',
           borderRadius: 'var(--radius-md)',
